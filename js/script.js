@@ -37,14 +37,18 @@ YOU ${aScore[0]} COM ${aScore[1]}`);
   if (sCalWin) return console.log("GAME OVER!");
 
   let sValue = prompt(
-    `Input one of the following options:
-ROCK, PAPER, SCISSORS`,
+    `Type: ROCK, PAPER, SCISSORS`,
     aHand[Math.floor(Math.random() * 3)]
   );
 
   sValue = sValue.toUpperCase();
 
-  if (!aHand.includes(sValue)) return startGame();
+  if (!aHand.includes(sValue)) {
+    alert(`VALUE IS INVALID!
+Type one of the following options:
+ROCK, PAPER, SCISSORS`);
+    return startGame();
+  }
 
   playGame(sValue, computerHand());
 }
