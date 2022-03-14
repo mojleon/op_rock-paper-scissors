@@ -45,6 +45,8 @@ button {
   font-weight: 900;
   color: white;
   background: #333;
+
+  transition: 250ms;
 }
 
 button:hover {
