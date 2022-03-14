@@ -1,14 +1,17 @@
 var aScore = [0, 0];
 var aHand = ["PAPER", "ROCK", "SCISSORS"];
 
+let drawSection = document.querySelector("#draw").style;
+let scoreSection = document.querySelector("#score").style;
+
 function computerHand() {
   return aHand[Math.floor(Math.random() * 3)];
 }
 
 function playGame(playerHand, computerHand) {
   if (playerHand == computerHand) {
-    alert("draw");
-    return startGame();
+    draw();
+    return;
   }
 
   let oWin = {
@@ -17,36 +20,37 @@ function playGame(playerHand, computerHand) {
     2: 0,
   };
 
-  if (oWin[aHand.indexOf(playerHand)] == aHand.indexOf(computerHand)) {
-    alert("VICTORY!");
+  if (oWin[aHand.indexOf(playerHand)] == aHand.indexOf(computerHand))
     aScore[0]++;
-    return startGame();
-  }
+  else aScore[1]++;
 
-  alert("LOSER!");
-  aScore[1]++;
-  return startGame();
+  changeDom();
+  gameOver();
 }
 
-function startGame() {
-  console.log(`The score so far is: 
-YOU ${aScore[0]} COM ${aScore[1]}`);
-
-  let sValue = prompt(
-    `Type: ROCK, PAPER, SCISSORS`,
-    aHand[Math.floor(Math.random() * 3)]
-  );
-
-  sValue = sValue.toUpperCase();
-
-  if (!aHand.includes(sValue)) {
-    alert(`VALUE IS INVALID!
-Type one of the following options:
-ROCK, PAPER, SCISSORS`);
-    return startGame();
-  }
-
-  playGame(sValue, computerHand());
+function changeDom() {
+  document.querySelector("#win").innerText = aScore[0];
+  document.querySelector("#lose").innerText = aScore[1];
 }
 
-startGame();
+function gameOver() {
+  if (aScore[0] == 5) alert("YOU WIN!");
+  if (aScore[1] == 5) alert("YOU LOSE!");
+}
+
+function draw() {
+  drawSection.display = "block";
+  scoreSection.display = "none";
+}
+
+function resetScreen() {
+  drawSection.display = "none";
+  scoreSection.display = "flex";
+}
+
+function startGame(butValue) {
+  if (aScore.includes(5)) return;
+
+  resetScreen();
+  playGame(butValue, computerHand());
+}
