@@ -32,10 +32,6 @@ function startGame() {
   console.log(`The score so far is: 
 YOU ${aScore[0]} COM ${aScore[1]}`);
 
-  let sCalWin = calculateWinner();
-
-  if (sCalWin) return console.log("GAME OVER!");
-
   let sValue = prompt(
     `Type: ROCK, PAPER, SCISSORS`,
     aHand[Math.floor(Math.random() * 3)]
@@ -51,10 +47,6 @@ ROCK, PAPER, SCISSORS`);
   }
 
   playGame(sValue, computerHand());
-}
-
-function calculateWinner() {
-  if (aScore.includes(5)) return true;
 }
 
 startGame();
